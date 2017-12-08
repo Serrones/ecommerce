@@ -2,11 +2,11 @@
 This view was created only to test our Django application.
 Here we have a simple function based view (home_page)
 """
-
+from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from .forms import ContactForm
+from .forms import ContactForm, LoginForm
 
 
 
@@ -43,7 +43,37 @@ def contact_page(request):
     #     print(request.POST.get('content'))
     return render(request, "contact/view.html", context)
 
+def login_page(request):
+    form = LoginForm(request.POST or None)
+    context = {
+        "form": form
+    }
+    #print(request.user.is_authenticated())
+    if form.is_valid():
+        # print(form.cleaned_data)
+        username= form.cleaned_data.get('username')
+        password= form.cleaned_data.get('password')
+        user = authenticate(request, username=username, password=password)
+        print("Login is authenticated")
+        print(user)
+        #print(request.user.is_authenticated())
+        if user is not None:
+            #print(request.user.is_authenticated())
+            login(request, user)
+            # redirect to a success Page
+            # context ["form"] = LoginForm()
+            return redirect('/login')
+        else:
+            # Return to an 'invalid login page'
+            print('Error!!!!!!!!')
+            return redirect ('/login')
+    return render(request, "auth/login.html", context)
 
+def register_page(request):
+    form = LoginForm(request.POST or None)
+    if form.is_valid():
+        print(form.cleaned_data)
+    return render(request, "auth/register.html", {})
 
 
 # Function based view with an html script inside
