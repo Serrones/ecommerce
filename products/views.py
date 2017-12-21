@@ -3,16 +3,30 @@ from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from .models import Product
 
-# Create your views here.
+
+class ProductFeaturedListView(ListView):
+    template_name = "products/list.html"
+
+    def get_queryset(self, *args, **kwargs):
+        request = self.request
+        return Product.objects.all().featured()
+
+class ProductFeaturedDetailView(DetailView):
+    queryset = Product.objects.all().featured()
+    template_name = "products/featured-detail.html"
+    # def get_queryset(self, *args, **kwargs):
+    #     request = self.request
+    #     return Product.objects.featured()
+
 
 # Class Based view
 class ProductListView(ListView):
     template_name = "products/list.html"
 
-    def get_context_data(self, *args, **kwargs):
-            context = super(ProductListView, self).get_context_data(*args, **kwargs)
-            print(context)
-            return context
+    # def get_context_data(self, *args, **kwargs):
+    #         context = super(ProductListView, self).get_context_data(*args, **kwargs)
+    #         print(context)
+    #         return context
 
     def get_queryset(self, *args, **kwargs):
         request = self.request
