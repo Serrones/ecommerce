@@ -63,6 +63,21 @@ class ProductDetailView(DetailView):
     #     pk      = self.kwargs.get('pk')
     #     return Product.objects.filter(pk=pk)
 
+# view for slug use in URLs
+class ProductDetailSlugView(DetailView):
+    queryset = Product.objects.all()
+    template_name = "products/detail.html"
+
+    def get_object(self, *args, **kwargs):
+        request = self.request
+        print(request)
+        slug      = self.kwargs.get('slug')
+        print(slug)
+        instance = get_object_or_404(Product, slug=slug, active=True)
+        print(instance)
+        return instance
+
+
 
 
 # Function Based view
