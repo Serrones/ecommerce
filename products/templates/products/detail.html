@@ -1,4 +1,13 @@
+{% extends "base.html" %}
 
-{{ object.title }} </br>
-{{ object.description }} </br>
-<img src='{{ object.image.url }}' height="200" width="200" class='img-fluid'/></br></br>
+{% block base_head %}
+
+<title>Detail Product</title>
+
+{% endblock %}
+
+{% block content %}
+    {{ object.title }} </br>
+    {{ object.description }} </br>
+    <img src='{{ object.image.url }}' height="200" width="200" class='img-fluid'/></br></br>
+{% endblock %}
