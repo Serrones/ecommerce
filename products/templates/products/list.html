@@ -1,13 +1,28 @@
+{% extends "base.html" %}
+
+{% block base_head %}
+
+<title>Products List </title>
+
+{% endblock %}
+
+{% block content %}
+    <div class='container'>
+        <div class='row'>
+            {% for obj in object_list %}
+                <div class='col'>
+                {% include 'products/snippets/card.html' with instance=obj %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+
 <!-- {{ qs }}
 
 
 {{ product_list }}
 
 -->
-
-{% for obj in object_list %}
-
-<a href= '{{ obj.get_absolute_url }}'>{{ obj.title }}</a> </br>
-<img src='{{ obj.image.url }}' height="150" width="150" class='img-fluid'/></br>
-
-{% endfor %}
