@@ -1,3 +1,11 @@
+"""
+
+Just some examples of how to apply forms with widgets
+
+"""
+
+
+
 from django import forms
 from django.contrib.auth import get_user_model
 
