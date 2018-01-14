@@ -7,15 +7,13 @@
 {% endblock %}
 
 {% block content %}
-<div class='container'>
-    <div class='row'>
-        <div class='col'>
-            <h1>{{ object.title }}</h1>
-            <h3>{{ 'É isso que você deseja?'|title }}</h3>
-            <h6>{{ object.timestamp }}</h6>
-            {{ object.description|linebreaks }} </br>
-            <img src='{{ object.image.url }}' height="200" width="200" class='img-fluid'/></br></br>
-        </div>
+<div class='row'>
+    <div class='col'>
+        <h1>{{ object.title }}</h1>
+        <h3>{{ 'É isso que você deseja?'|title }}</h3>
+        <h6>{{ object.timestamp }}</h6>
+        {{ object.description|linebreaks }} </br>
+        <img src='{{ object.image.url }}' height="200" width="200" class='img-fluid'/></br></br>
     </div>
 </div>
 {% endblock %}
