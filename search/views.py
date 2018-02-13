@@ -4,7 +4,12 @@ from products.models import Product
 
 # Class Based view
 class SearchProductView(ListView):
-    template_name = "products/list.html"
+    template_name = "search/view.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SearchProductView, self).get_context_data(*args, **kwargs)
+        context['query'] = self.request.GET.get('q')
+        return context
 
     def get_queryset(self, *args, **kwargs):
         request = self.request
@@ -13,10 +18,10 @@ class SearchProductView(ListView):
         print(query)
         if query is not None:
             return Product.objects.filter(title__icontains=query)
-        return Product.objects.featured()
-
+        return Product.objects.none()
 
         """
         __icontains  = field that contains (doesn't matter capitalized letters)
-        __iexact = field is exactly this
+
+        __iexact = field is exactly this (case sensitive)
         """
