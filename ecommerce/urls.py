@@ -38,7 +38,10 @@ urlpatterns = [
     url(r'^register/$', register_page, name='register'),
     url(r'^bootstrap/$', TemplateView.as_view(template_name='bootstrap/example.html')),
 
+    # Apps urls
     url(r'^products/', include('products.urls', namespace='products')),
+    url(r'^search/', include('search.urls', namespace='search')),
+
     # url(r'^products-fbv/$', product_list_view),
     #
     # url(r'^products/(?P<pk>\d+)/$', ProductDetailView.as_view()),
