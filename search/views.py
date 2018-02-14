@@ -17,8 +17,8 @@ class SearchProductView(ListView):
         query = method_dict.get('q', None)
         print(query)
         if query is not None:
-            return Product.objects.filter(title__icontains=query)
-        return Product.objects.none()
+            return Product.objects.search(query)
+        return Product.objects.featured()
 
         """
         __icontains  = field that contains (doesn't matter capitalized letters)
